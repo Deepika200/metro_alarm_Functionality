@@ -1,0 +1,13 @@
+<div *ngIf="routeStations.length > 0">
+    <h2>Route Stations:</h2>
+    <ul>
+      <li *ngFor="let station of routeStations">
+        {{ station.stop_name }}
+      </li>
+    </ul>
+    <button (click)="setAlarm()">Set Alarm</button>
+  </div>
+  <div *ngIf="routeStations.length === 0">
+    <p>No route found between the selected stations.</p>
+  </div>
+  

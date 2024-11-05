@@ -1,0 +1,23 @@
+
+<div class="route-list">
+    <h2>Select Route</h2>
+
+<div>
+<label for="startstation">Start Station:</label>
+<select [(ngModel)]="startStation" (change)="endStation =null" id="startStation">
+    <option *ngFor="let station of stations" [ngValue]="station">{{station.stop_name}}</option>
+    
+</select>
+</div>
+<div>
+    
+        <label for="endStation">End Station:</label>
+        <select [(ngModel)]="endStation" [disabled]="!startStation" id="endStation">
+          <option *ngFor="let station of getFilteredEndStations()" [ngValue]="station">{{ station.stop_name }}</option>
+        </select>
+      </div>
+      <button (click)="onSearch()" [disabled]="!startStation || !endStation">Search Route</button>
+      <button (click)="onReset()">Reset</button>
+    
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </div>
