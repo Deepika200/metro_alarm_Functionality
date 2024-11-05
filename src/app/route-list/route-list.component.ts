@@ -25,19 +25,22 @@ export class RouteListComponent implements OnInit {
   getFilteredEndStations() {
     return this.stations.filter(station => station !== this.startStation);
   }
-
   onSearch(): void {
     if (this.startStation && this.endStation) {
       this.metroDataService.getRouteStations(this.startStation.stop_id, this.endStation.stop_id).subscribe(routeStations => {
-        // Navigate to StopListComponent and pass routeStations
+        console.log('Route Stations Retrieved:', routeStations); // Log the retrieved route stations
+        // Navigate to StopListComponent and pass routeStations and endStation
         this.router.navigate(['/stop-list'], {
-          state: { routeStations: routeStations }
+          state: { routeStations: routeStations, endStation: this.endStation } // Pass endStation here
         });
       }, error => {
+        console.error('Error fetching route stations:', error); // Log any errors
         this.errorMessage = 'No route found. Try another route or check for transfers.';
       });
     }
   }
+  
+  
 
   onReset(): void {
     this.startStation = null;

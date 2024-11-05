@@ -1,13 +1,22 @@
 <div *ngIf="routeStations.length > 0">
-    <h2>Route Stations:</h2>
-    <ul>
-      <li *ngFor="let station of routeStations">
-        {{ station.stop_name }}
-      </li>
-    </ul>
-    <button (click)="setAlarm()">Set Alarm</button>
-  </div>
-  <div *ngIf="routeStations.length === 0">
-    <p>No route found between the selected stations.</p>
-  </div>
-  
+  <h2>Route Stations:</h2>
+  <ul>
+    <li *ngFor="let station of routeStations">
+      {{ station.stop_name }}
+    </li>
+  </ul>
+  <button (click)="onSearch()">Set Alarm</button> <!-- Call onSearch to set alarm -->
+</div>
+<div *ngIf="routeStations.length === 0">
+  <p>No route found between the selected stations.</p>
+</div>
+<div *ngIf="alarmStations.length > 0">
+  <h3>Alarm Set for:</h3>
+  <ul>
+    <li *ngFor="let station of alarmStations">{{ station.stop_name }}</li>
+  </ul>
+</div>
+
+<div *ngIf="errorMessage" style="color: red;">
+  {{ errorMessage }}
+</div>

@@ -1,1 +1,10 @@
-<p>alarm-setup works!</p>
+<div *ngIf="alarmStations.length > 0">
+    <h2>Alarm Set for:</h2>
+    <ul>
+      <li *ngFor="let station of alarmStations">{{ station.stop_name }}</li>
+    </ul>
+  </div>
+  <div *ngIf="alarmStations.length === 0">
+    <p>No alarms set.</p>
+  </div>
+  
