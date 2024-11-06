@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AlarmSetupComponent implements OnInit {
   alarmStations: Station[] = [];
+  alarmMessage: string = "Your stop is approaching. Please be prepared to exit the train.";
 
   constructor(private router: Router) {
     // Retrieve the passed alarm stations data
@@ -20,4 +21,20 @@ export class AlarmSetupComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Received Alarm Stations:', this.alarmStations); // Debugging to see received stations
-  } }
+  } 
+
+
+  triggerAlarm() {
+    // Check if speech synthesis is supported
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(this.alarmMessage);
+      utterance.rate = 1; // Set speaking rate
+utterance.pitch = 5; // Set pitch
+
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert("Speech synthesis is not supported in this browser.");
+    }
+  }
+
+}
